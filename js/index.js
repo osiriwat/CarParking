@@ -58,6 +58,8 @@ var app = {
 
         scanner.scan( function (result) { 
 
+			$('#Load').load('http://www.google.co.in');
+			
             alert("We got a barcode\n" + 
             "Result: " + result.text + "\n" + 
             "Format: " + result.format + "\n" + 
