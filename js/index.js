@@ -57,14 +57,16 @@ var app = {
         var scanner = cordova.plugins.barcodeScanner;
 
         scanner.scan( function (result) { 
-
+        document.getElementById("info").innerHTML = result.text;
 	$.ajax({
 	  dataType:'html',
 	  url:'http://www.google.co.in',
 	  success:function(data) {
 	    $('#Load').html($(data).children());   
 	  }
-	});	
+	});
+		
+		
             /*
             if (args.format == "QR_CODE") {
                 window.plugins.childBrowser.showWebPage(args.text, { showLocationBar: false });
