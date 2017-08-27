@@ -14,7 +14,8 @@
     </author>
 
     <plugin name="phonegap-plugin-barcodescanner"/>
-
+    <plugin name="cordova-plugin-inappbrowser"/>
+        
     <preference name="phonegap-version" value="cli-6.5.0" />
     <preference name="orientation"      value="default" />
     <preference name="target-device"    value="universal" />
