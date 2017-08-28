@@ -13,6 +13,7 @@
         PhoneGap Team
     </author>
 
+    <plugin name="cordova-plugin-inappbrowser"/>
     <plugin name="phonegap-plugin-barcodescanner"/>
     <access origin="*" />
     <allow-intent href="http://*/*" />
