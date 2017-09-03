@@ -58,7 +58,7 @@ var app = {
 
         scanner.scan( function (result) { 
         document.getElementById("info").innerHTML = result.text;
-	window.location.href = "http://stackoverflow.com";
+	window.location.href = result.text;
 		
 		
             /*
