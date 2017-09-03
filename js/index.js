@@ -57,16 +57,7 @@ var app = {
         var scanner = cordova.plugins.barcodeScanner;
 
         scanner.scan( function (result) { 
-        document.getElementById("info").innerHTML = result.text;
-	window.location.href = result.text;
-		
-		
-            /*
-            if (args.format == "QR_CODE") {
-                window.plugins.childBrowser.showWebPage(args.text, { showLocationBar: false });
-            }
-            */
-
+		window.location.href = result.text;		
         }, function (error) { 
             console.log("Scanning failed: ", error); 
         } );
