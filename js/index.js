@@ -58,13 +58,7 @@ var app = {
 
         scanner.scan( function (result) { 
         document.getElementById("info").innerHTML = result.text;
-	$.ajax({
-	  dataType:'html',
-	  url:'http://www.google.co.in',
-	  success:function(data) {
-	    $('#Load').html($(data).children());   
-	  }
-	});
+	window.location.href = "http://stackoverflow.com";
 		
 		
             /*
