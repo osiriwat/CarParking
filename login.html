@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -29,12 +29,22 @@
                 var app = angular.module('myApp', []);
                 app.controller('myCtrl', function ($scope, $http, $window) {
                     $scope.Login = function () {
-                        $http.get('http://carparking.prodevelopment.net/Users/Login?username=' + $scope.UserName + '&password=' + $scope.Password).then(function (response) {
-                            $scope.firstName = response.data.FirstName;
-                            if (response.data!="null")
+                        var get = $http({
+                            method: "GET",
+                            url: 'http://carparking.prodevelopment.net/Users/Login?username=' + $scope.UserName + '&password=' + $scope.Password,
+                            dataType: 'json',
+                            data: {
+                                UserName: $scope.UserName,
+                                Password: $scope.Password
+                            },
+                            headers: { "Content-Type": "application/json" }
+                        }).then(function successCallback(response) {
+                            if (response.data != "null")
                                 window.location.href = "home.html";
                             else
                                 alert("User name หรือ Password ไม่ถูกต้อง");
+                        }, function errorCallback(response) {
+                            alert("Error");
                         });
                     }
                 });
