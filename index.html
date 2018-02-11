@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Multi-page template</title>
-   
+    <title>Login</title>
+
     <script src="js/angular.min.js"></script>
     <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
     <script src="js/jquery-1.11.3.min.js"></script>
@@ -14,68 +14,34 @@
 <body>
     <div data-role="page">
         <div data-role="header">
-            <h1>Single page</h1>
+            <h1>Login</h1>
         </div>
         <div role="main" class="ui-content">
             <div ng-app="myApp" ng-controller="myCtrl">
-                <h1>You entered: {{firstName}}</h1>
-                <p>First Name: <input type="text" name="firstName" ng-model="firstName" required /></p>
-                <p>Last Name: <input type="text" name="lastName" ng-model="lastName" required /></p>
-                <button ng-click="Add()">Add</button>
-                <button ng-click="Update()">Update</button>
-                <button ng-click="Delete()">Delete</button>
+
+                <h3>User: <input type="text" name="UserName" ng-model="UserName" required /></h3>
+                <h3>Password: <input type="password" name="Password" ng-model="Password" required /></h3>
+                <button ng-click="Login()">เข้าสู่ระบบ</button>
+                <p align="right"><a href="register.html" rel="external">Register</a></p>
+
             </div>
             <script>
                 var app = angular.module('myApp', []);
                 app.controller('myCtrl', function ($scope, $http, $window) {
-                    $http.get('http://carparking.prodevelopment.net/Users/Details/1').then(function (response) {
-                        $scope.firstName = response.data.FirstName;
-                    });
-
-                    $scope.Add = function () {
-                        var post = $http({
-                            method: "POST",
-                            url: "http://carparking.prodevelopment.net/Users/Create",
-                            dataType: 'json',
-                            data: { FirstName: $scope.firstName, LastName: $scope.lastName },
-                            headers: { "Content-Type": "application/json" }
-                        }).then(function successCallback(response) {
-                            alert("Save Success");
-                        }, function errorCallback(response) {
-                            alert("Error");
-                        });
-                    }
-                    $scope.Update = function () {
-                        var post = $http({
-                            method: "POST",
-                            url: "http://carparking.prodevelopment.net/Users/Edit",
-                            dataType: 'json',
-                            data: { Id: 3,FirstName: $scope.firstName, LastName: $scope.lastName },
-                            headers: { "Content-Type": "application/json" }
-                        }).then(function successCallback(response) {
-                            alert("Save Success");
-                        }, function errorCallback(response) {
-                            alert("Error");
-                        });
-                    }
-                    $scope.Delete = function () {
-                        var post = $http({
-                            method: "POST",
-                            url: "http://carparking.prodevelopment.net/Users/Delete",
-                            dataType: 'json',
-                            data: { Id: 2 },
-                            headers: { "Content-Type": "application/json" }
-                        }).then(function successCallback(response) {
-                            alert("Save Success");
-                        }, function errorCallback(response) {
-                            alert("Error");
+                    $scope.Login = function () {
+                        $http.get('http://localhost:4737/Users/Login?username=' + $scope.UserName + '&password=' + $scope.Password).then(function (response) {
+                            $scope.firstName = response.data.FirstName;
+                            if (response.data!="null")
+                                $window.location.href = "home.html";
+                            else
+                                alert("User name หรือ Password ไม่ถูกต้อง");
                         });
                     }
                 });
             </script>
         </div>
         <div data-role="footer">
-            <h4>Footer content</h4>
+            <h4></h4>
         </div>
     </div>
 </body>
