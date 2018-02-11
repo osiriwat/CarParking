@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -21,7 +21,7 @@
 
                 <h3>User: <input type="text" name="UserName" ng-model="UserName" required /></h3>
                 <h3>Password: <input type="password" name="Password" ng-model="Password" required /></h3>
-                <button ng-click="Login()">เข้าสู่ระบบ</button>
+                <button ng-click="Login()">เข้าสู่ระบบ2</button>
                 <p align="right"><a href="register.html" rel="external">Register</a></p>
 
             </div>
@@ -29,12 +29,22 @@
                 var app = angular.module('myApp', []);
                 app.controller('myCtrl', function ($scope, $http, $window) {
                     $scope.Login = function () {
-                        $http.get('http://localhost:4737/Users/Login?username=' + $scope.UserName + '&password=' + $scope.Password).then(function (response) {
-                            $scope.firstName = response.data.FirstName;
-                            if (response.data!="null")
-                                $window.location.href = "home.html";
+                        var get = $http({
+                            method: "GET",
+                            url: 'http://carparking.prodevelopment.net/Users/Login?username=' + $scope.UserName + '&password=' + $scope.Password,
+                            dataType: 'json',
+                            data: {
+                                UserName: $scope.UserName,
+                                Password: $scope.Password
+                            },
+                            headers: { "Content-Type": "application/json" }
+                        }).then(function successCallback(response) {
+                            if (response.data != "null")
+                                window.location.href = "home.html";
                             else
                                 alert("User name หรือ Password ไม่ถูกต้อง");
+                        }, function errorCallback(response) {
+                            alert("Error");
                         });
                     }
                 });
