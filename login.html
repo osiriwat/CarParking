@@ -32,7 +32,7 @@
                         $http.get('http://carparking.prodevelopment.net/Users/Login?username=' + $scope.UserName + '&password=' + $scope.Password).then(function (response) {
                             $scope.firstName = response.data.FirstName;
                             if (response.data!="null")
-                                $window.location.href = "home.html";
+                                window.location.href = "home.html";
                             else
                                 alert("User name หรือ Password ไม่ถูกต้อง");
                         });
