@@ -22,42 +22,12 @@
                     <h2 class="intro" align="center">สมัครสมาชิก เพื่อใช้งานโปรแกรมจองที่จอดรถ</h2>
                     <h4 class="intro" align="center">กรุณากรอกข้อมูลให้ครบทุกช่อง</h4>
                     <h3>First name: <input type="text" name="FirstName" ng-model="FirstName" required /></h3>
-                    <span style="color:red" ng-show="myForm.FirstName.$dirty && myForm.FirstName.$invalid">
-                        <span ng-show="myForm.FirstName.$error.required">First name is required.</span>
-                    </span>
                     <h3>Last name: <input type="text" name="LastName" ng-model="LastName" required /></h3>
-                    <span style="color:red" ng-show="myForm.LastName.$dirty && myForm.LastName.$invalid">
-                        <span ng-show="myForm.LastName.$error.required">Last name is required.</span>
-                    </span>
                     <h3>Telephone number: <input type="text" name="PhoneNo" ng-model="PhoneNo" required /></h3>
-                    <span style="color:red" ng-show="myForm.PhoneNo.$dirty && myForm.LastName.$invalid">
-                        <span ng-show="myForm.PhoneNo.$error.required">Telephone number is required.</span>
-                    </span>
                     <h3>E-mail: <input type="text" name="Email" ng-model="Email" required /></h3>
-                    <span style="color:red" ng-show="myForm.Email.$dirty && myForm.Email.$invalid">
-                        <span ng-show="myForm.Email.$error.required">E-mail is required.</span>
-                    </span>
                     <h3>User name: <input type="text" name="UserName" ng-model="UserName" required /></h3>
-                    <span style="color:red" ng-show="myForm.UserName.$dirty && myForm.UserName.$invalid">
-                        <span ng-show="myForm.UserName.$error.required">User name is required.</span>
-                    </span>
                     <h3>Password: <input type="text" name="Password" ng-model="Password" required /></h3>
-                    <span style="color:red" ng-show="myForm.Password.$dirty && myForm.Password.$invalid">
-                        <span ng-show="myForm.Password.$error.required">Password name is required.</span>
-                    </span>
                     <h3>Re-Password: <input type="text" name="RePassword" ng-model="RePassword" required /></h3>
-                    <span style="color:red" ng-show="myForm.RePassword.$dirty && myForm.RePassword.$invalid">
-                        <span ng-show="myForm.RePassword.$error.required">Re-Password is required.</span>
-                    </span>
-                    <button ng-disabled="myForm.FirstName.$dirty && myForm.FirstName.$invalid ||
-                            myForm.LastName.$dirty && myForm.LastName.$invalid ||
-                            myForm.PhoneNo.$dirty && myForm.PhoneNo.$invalid ||
-                            myForm.Email.$dirty && myForm.Email.$invalid ||
-                            myForm.Password.$dirty && myForm.Password.$invalid
-                            "
-                            ng-click="Register()">
-                        ลงทะเบียน
-                    </button>
                     <input type="submit" name="login" value="ลงทะเบียน" />
                 </form>
             </div>
