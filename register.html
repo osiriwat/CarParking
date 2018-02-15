@@ -21,13 +21,13 @@
                 <form action="#" ng-submit="Register()" name="myForm">
                     <h2 class="intro" align="center">Register</h2>
                     <h4 class="intro" align="center">Please fill in all information.</h4>
-                    <h3>First name: <input type="text" name="FirstName" ng-model="FirstName" required /></h3>
-                    <h3>Last name: <input type="text" name="LastName" ng-model="LastName" required /></h3>
-                    <h3>Telephone number: <input type="text" name="PhoneNo" ng-model="PhoneNo" required /></h3>
-                    <h3>E-mail: <input type="text" name="Email" ng-model="Email" required /></h3>
-                    <h3>User name: <input type="text" name="UserName" ng-model="UserName" required /></h3>
-                    <h3>Password: <input type="password" name="Password" ng-model="Password" required /></h3>
-                    <h3>Re-Password: <input type="password" name="RePassword" ng-model="RePassword" required equal="{{Password}}" /></h3>
+                    <h3>First name: <input type="text" name="FirstName" ng-model="FirstName" required oninvalid="this.setCustomValidity('Please fill our this field')" /></h3>
+                    <h3>Last name: <input type="text" name="LastName" ng-model="LastName" required oninvalid="this.setCustomValidity('Please fill our this field')" /></h3>
+                    <h3>Telephone number: <input type="text" name="PhoneNo" ng-model="PhoneNo" required oninvalid="this.setCustomValidity('Please fill our this field')" /></h3>
+                    <h3>E-mail: <input type="text" name="Email" ng-model="Email" required oninvalid="this.setCustomValidity('Please fill our this field')" /></h3>
+                    <h3>User name: <input type="text" name="UserName" ng-model="UserName" required oninvalid="this.setCustomValidity('Please fill our this field')" /></h3>
+                    <h3>Password: <input type="password" name="Password" ng-model="Password" required oninvalid="this.setCustomValidity('Please fill our this field')" /></h3>
+                    <h3>Re-Password: <input type="password" name="RePassword" ng-model="RePassword" required oninvalid="this.setCustomValidity('Please fill our this field')" equal="{{Password}}" /></h3>
                     <span ng-show="form.RePassword.$error.equal" class="help-block">Password does not match above</span>
                     <input type="submit" name="login" value="Register" />
                 </form>
