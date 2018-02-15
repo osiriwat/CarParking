@@ -19,7 +19,7 @@
         <div role="main" class="ui-content">
             <div ng-app="myApp" ng-controller="myCtrl">
             <form action="#" ng-submit="Login()" name="myForm">
-                <h3>User: <input type="text" name="UserName" ng-model="UserName" required /></h3>
+                <h3>User: <input type="text" name="UserName" ng-model="UserName" required oninvalid="this.setCustomValidity('Please fill our this field')" /></h3>
                 <h3>Password: <input type="password" name="Password" ng-model="Password" required /></h3>
                 <input type="submit" name="login" value="Login" />
                 <p align="right"><a href="register.html" rel="external">Register</a></p>
