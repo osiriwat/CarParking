@@ -20,39 +20,39 @@
         <div data-role="header">
             <h1>Reservation</h1>
         </div>
-        <div role="main" class="ui-content">
+        <div role="main" class="ui-content" ng-app="myApp" ng-controller="myCtrl">
             <h3>Building:</h3>
-            <select name="select-choice-a" id="select-choice-a" data-native-menu="false">
-                <option>Building</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
+            <select ng-change="BuildingFilter()" name="select-choice-a" id="select-choice-a" data-native-menu="true" ng-options="x.Name for x in building" ng-model="buildings"></select>
             <h3>Class:</h3>
-            <select name="select-choice-b" id="select-choice-b" data-native-menu="false">
-                <option>Class</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select>
+            <select ng-change="BuildingClassFilter()" name="select-choice-b" id="select-choice-b" data-native-menu="true" ng-options="x.Name for x in buildingClassMaster" ng-model="buildingClass"></select>
             <h3>Park:</h3>
-            <select name="select-choice-c" id="select-choice-c" data-native-menu="false">
-                <option>Park</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select><br /><br /><br />
+            <select name="select-choice-c" id="select-choice-c" data-native-menu="true" ng-options="x.Name for x in buildingParkMaster" ng-model="buildingPark"></select>
+            <br /><br /><br />
             <div ng-app="myApp" ng-controller="myCtrl">
                 <button ng-click="Reservation3()">Confirm</button>
             </div>
             <script>
                 var app = angular.module('myApp', []);
                 app.controller('myCtrl', function ($scope, $http, $window) {
+                    $http.get('http://localhost:4737/Building').then(function (response) {
+                        $scope.building = response.data;
+                    });
                     $scope.Reservation3 = function () {
-                        window.location.href = "reservation3.html";
+                        if ($scope.buildings && $scope.buildingClass && $scope.buildingPark) {
+                            window.location = "reservation3.html?buid=" + $scope.buildings.Id + "&bucid=" + $scope.buildingClass.Id + "&bupid=" + $scope.buildingPark.Id;
+                        } else {
+                            alert("Please fill in all information");
+                        }
+                    }
+                    $scope.BuildingFilter = function () {
+                        $http.get('http://localhost:4737/Building/BuildingClass/' + $scope.buildings.Id).then(function (response) {
+                            $scope.buildingClassMaster = response.data;
+                        });
+                    }
+                    $scope.BuildingClassFilter = function () {
+                        $http.get('http://localhost:4737/Building/BuildingPark/' + $scope.buildingClass.Id).then(function (response) {
+                            $scope.buildingParkMaster = response.data;
+                        });
                     }
                 });
             </script>

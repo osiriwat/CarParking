@@ -29,15 +29,20 @@
         <div data-role="header">
             <h1>Reservation</h1>
         </div>
-        <div role="main" class="ui-content">
-		    <div align="center"><h3 align="center" class="button">3 Left</h3></div>
-            
-            <div ng-app="myApp" ng-controller="myCtrl">
-               <button  ng-click="Reservation2()">Reservation</button>
+        <div role="main" class="ui-content"  ng-app="myApp" ng-controller="myCtrl">
+            <div align="center">
+                <h3 align="center" class="button">{{available}} Left</h3>
+            </div>
+
+            <div>
+                <button ng-click="Reservation2()">Reservation</button>
             </div>
             <script>
                 var app = angular.module('myApp', []);
                 app.controller('myCtrl', function ($scope, $http, $window) {
+                    $http.get('http://localhost:4737/Building/countAllParkAvailable').then(function (response) {
+                        $scope.available = response.data;
+                    });
                     $scope.Reservation2 = function () {
                         window.location.href = "reservation2.html";
                     }
