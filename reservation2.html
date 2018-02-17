@@ -13,14 +13,28 @@
         .ui-select > .ui-btn {
             background: black !important;
         }
+
+        .buttonLogOut {
+            border: none;
+            color: white;
+            padding: 10px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-    <div data-role="page">
+    <div data-role="page" ng-app="myApp" ng-controller="myCtrl">
         <div data-role="header">
             <h1>Reservation</h1>
+            <a style="display:none;" href=""></a>
+            <button style="background-color:red;" ng-click="Logout()" class="buttonLogOut">Log out</button>
         </div>
-        <div role="main" class="ui-content" ng-app="myApp" ng-controller="myCtrl">
+        <div role="main" class="ui-content" >
             <h3>Building:</h3>
             <select ng-change="BuildingFilter()" name="select-choice-a" id="select-choice-a" data-native-menu="true" ng-options="x.Name for x in building" ng-model="buildings"></select>
             <h3>Class:</h3>
@@ -34,25 +48,31 @@
             <script>
                 var app = angular.module('myApp', []);
                 app.controller('myCtrl', function ($scope, $http, $window) {
-                    $http.get('http://localhost:4737/Building').then(function (response) {
+                    $http.get('http://carparking.prodevelopment.net/Building').then(function (response) {
                         $scope.building = response.data;
                     });
                     $scope.Reservation3 = function () {
                         if ($scope.buildings && $scope.buildingClass && $scope.buildingPark) {
-                            window.location = "reservation3.html?buid=" + $scope.buildings.Id + "&bucid=" + $scope.buildingClass.Id + "&bupid=" + $scope.buildingPark.Id;
+                            window.location = "reservation3.html?buid=" + $scope.buildings.Id + "&bucid=" + $scope.buildingClass.BuildingClassId + "&bupid=" + $scope.buildingPark.BuildingParkId;
                         } else {
                             alert("Please fill in all information");
                         }
                     }
                     $scope.BuildingFilter = function () {
-                        $http.get('http://localhost:4737/Building/BuildingClass/' + $scope.buildings.Id).then(function (response) {
+                        $http.get('http://carparking.prodevelopment.net/Building/BuildingClass/' + $scope.buildings.Id).then(function (response) {
                             $scope.buildingClassMaster = response.data;
                         });
                     }
                     $scope.BuildingClassFilter = function () {
-                        $http.get('http://localhost:4737/Building/BuildingPark/' + $scope.buildingClass.Id).then(function (response) {
+                        $http.get('http://carparking.prodevelopment.net/Building/BuildingPark/' + $scope.buildingClass.BuildingClassId).then(function (response) {
                             $scope.buildingParkMaster = response.data;
                         });
+                    }
+                    $scope.Logout = function () {
+                        var userId = $window.sessionStorage.getItem("userId");
+                        if (userId != null)
+                            $window.sessionStorage.removeItem("userId");
+                        window.location.href = "index.html";
                     }
                 });
             </script>
