@@ -26,7 +26,7 @@
         .buttonLogOut {
             border: none;
             color: white;
-            padding: 10px 32px;
+            padding: 10px 15px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
@@ -47,11 +47,10 @@
             <div align="center">
                 <h3 align="center" class="button">{{available}} Left</h3>
             </div>
-            <div class="ui-grid-c" ng-repeat="x in buildingPark">
+            <div class="ui-grid-b" ng-repeat="x in buildingPark">
                 <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px;background-color:{{x.Color}};color:white;">{{ x.Name }}</div></div>
                 <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px;background-color:burlywood;color:white;">Block B</div></div>
                 <div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px;background-color:burlywood;color:white;">Block C</div></div>
-                <div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px;background-color:burlywood;color:white;">Block D</div></div>
             </div><!-- /grid-c -->
             <div>
                 <button ng-click="Refresh()">Refresh</button>
