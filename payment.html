@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
     <script src="js/jquery-1.11.3.min.js"></script>
     <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="config.js"></script>
     <style>
         .buttonLogOut {
             border: none;
@@ -33,34 +34,31 @@
         <div role="main" class="ui-content">
             <div>
                 <form action="#" ng-submit="Login()" name="myForm">
-                    <h3>Amount: <input type="text" name="UserName" ng-model="UserName" required oninvalid="this.setCustomValidity('Please fill our this field')" /></h3>
-                    <h3>Credit card no.(3 digits of card code): <input type="text" maxlength="3" name="Password" ng-model="Password" required oninvalid="this.setCustomValidity('Please fill our this field')" /></h3>
-                    <input type="submit" name="paid" value="Paid" />
+                    <h3>Amount: <input type="text" name="Payment" ng-model="Payment" ng-disabled="true"  /></h3>
+                    <h3>Credit card no.(3 digits of card code): <input type="text" maxlength="3" name="Credit" ng-model="Credit" required oninvalid="this.setCustomValidity('Please fill our this field')" /></h3>
+                    <input type="submit" name="paid" ng-click="Paid()" value="Paid" />
                 </form>
             </div>
-            <script>
+              <script>
                 var app = angular.module('myApp', []);
                 app.controller('myCtrl', function ($scope, $http, $window) {
-                    $scope.Login = function () {
-                        var get = $http({
-                            method: "GET",
-                            url: 'http://carparking.prodevelopment.net/Users/Login?username=' + $scope.UserName + '&password=' + $scope.Password,
-                            dataType: 'json',
-                            data: {
-                                UserName: $scope.UserName,
-                                Password: $scope.Password
-                            },
-                            headers: { "Content-Type": "application/json" }
-                        }).then(function successCallback(response) {
-                            if (response.data != "null")
-                                window.location.href = "home.html";
-                            else
-                                alert("User name หรือ Password ไม่ถูกต้อง");
-                        }, function errorCallback(response) {
-                            alert("Error");
-                        });
+					var userId = $window.sessionStorage.getItem("userId");
+					
+                    $http.get(ip_address+'Payment/GetTotalPayment?userId='+userId).then(function (response) {
+                        $scope.Payment = response.data;
+                    });
+                    $scope.Paid = function () {
+                        $http.get(ip_address+'Payment/Save?userId='+userId).then(function (response) {
+							if(response.data=='true')
+							{
+								$scope.Payment = 0.0;
+								alert('Complete!');
+							}else{
+								alert('Error!');
+							}
+						});             
                     }
-                    $scope.Logout = function () {
+					$scope.Logout = function () {
                         var userId = $window.sessionStorage.getItem("userId");
                         if (userId != null)
                             $window.sessionStorage.removeItem("userId");

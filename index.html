@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
     <script src="js/jquery-1.11.3.min.js"></script>
     <script src="js/jquery.mobile-1.4.5.min.js"></script>
-
+    <script src="config.js"></script>
 </head>
 <body>
     <div data-role="page">
@@ -17,13 +17,23 @@
             <h1>Login</h1>
         </div>
         <div role="main" class="ui-content">
+			<div class="text-right">
+				<a href="#popupCloseRight" id="myCheck" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn ui-icon-gear ui-btn-icon-left">Help</a>
+				<div data-role="popup" id="popupCloseRight" class="ui-content" style="max-width:280px">
+					<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+					<p>I have a close button at the top right corner with simple HTML markup.</p>
+					<p> <br> </p>
+					<p> <br> </p>
+					<p> <br> </p>
+				</div>
+		    </div>
             <div ng-app="myApp" ng-controller="myCtrl">
-            <form action="#" ng-submit="Login()" name="myForm">
-                <h3>User: <input type="text" name="UserName" ng-model="UserName" required oninvalid="this.setCustomValidity('Please fill our this field')" /></h3>
-                <h3>Password: <input type="password" name="Password" ng-model="Password" required oninvalid="this.setCustomValidity('Please fill our this field')" /></h3>
-                <input type="submit" name="login" value="Login" />
-                <p align="right"><a href="register.html" rel="external">Register</a></p>
-            </form>
+                <form action="#" ng-submit="Login()" name="myForm">
+                    <h3>User: <input type="text" name="UserName" ng-model="UserName" required oninvalid="this.setCustomValidity('Please fill our this field')" /></h3>
+                    <h3>Password: <input type="password" name="Password" ng-model="Password" required oninvalid="this.setCustomValidity('Please fill our this field')" /></h3>
+                    <input type="submit" name="login" value="Login" />
+                    <p align="right"><a href="register.html" rel="external">Register</a></p>
+                </form>
             </div>
             <script>
                 var app = angular.module('myApp', []);
@@ -36,7 +46,7 @@
                     $scope.Login = function () {
                         var get = $http({
                             method: "GET",
-                            url: 'http://carparking.prodevelopment.net/Users/Login?username=' + $scope.UserName + '&password=' + $scope.Password,
+                            url: ip_address + 'Users/Login?username=' + $scope.UserName + '&password=' + $scope.Password,
                             dataType: 'json',
                             data: {
                                 UserName: $scope.UserName,
@@ -57,6 +67,8 @@
                 });
             </script>
         </div>
+
+
         <div data-role="footer">
             <h4></h4>
         </div>

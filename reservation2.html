@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
     <script src="js/jquery-1.11.3.min.js"></script>
     <script src="js/jquery.mobile-1.4.5.min.js"></script>
+	<script src="config.js"></script>
     <style>
         .ui-select > .ui-btn {
             background: black !important;
@@ -48,7 +49,7 @@
             <script>
                 var app = angular.module('myApp', []);
                 app.controller('myCtrl', function ($scope, $http, $window) {
-                    $http.get('http://carparking.prodevelopment.net/Building').then(function (response) {
+                    $http.get(ip_address+'Building').then(function (response) {
                         $scope.building = response.data;
                     });
                     $scope.Reservation3 = function () {
@@ -59,12 +60,12 @@
                         }
                     }
                     $scope.BuildingFilter = function () {
-                        $http.get('http://carparking.prodevelopment.net/Building/BuildingClass/' + $scope.buildings.Id).then(function (response) {
+                        $http.get(ip_address+'Building/BuildingClass/' + $scope.buildings.Id).then(function (response) {
                             $scope.buildingClassMaster = response.data;
                         });
                     }
                     $scope.BuildingClassFilter = function () {
-                        $http.get('http://carparking.prodevelopment.net/Building/BuildingPark/' + $scope.buildingClass.BuildingClassId).then(function (response) {
+                        $http.get(ip_address+'Building/BuildingPark/' + $scope.buildingClass.BuildingClassId).then(function (response) {
                             $scope.buildingParkMaster = response.data;
                         });
                     }
