@@ -33,10 +33,10 @@
         </div>
         <div role="main" class="ui-content">
             <div>
-                <form action="#" ng-submit="Login()" name="myForm">
+                <form action="#" ng-submit="Paid()" name="myForm">
                     <h3>Amount: <input type="text" name="Payment" ng-model="Payment" ng-disabled="true"  /></h3>
                     <h3>Credit card no.(3 digits of card code): <input type="text" maxlength="3" name="Credit" ng-model="Credit" required oninvalid="this.setCustomValidity('Please fill our this field')" /></h3>
-                    <input type="submit" name="paid" ng-click="Paid()" value="Paid" />
+                    <input type="submit" name="paid" value="Paid" />
                 </form>
             </div>
               <script>
@@ -51,8 +51,9 @@
                         $http.get(ip_address+'Payment/Save?userId='+userId).then(function (response) {
 							if(response.data=='true')
 							{
-								$scope.Payment = 0.0;
+								$scope.Payment = "0.00";
 								alert('Complete!');
+								window.location.href = "home.html";
 							}else{
 								alert('Error!');
 							}
