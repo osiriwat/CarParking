@@ -68,7 +68,7 @@
                     $http.get(ip_address+'Building/countAllClassAvailable/' + bucid).then(function (response) {
                         $scope.available = response.data;
                     });
-                    $http.get(ip_address+'Building/BuildingPark/' + bucid).then(function (response) {
+                    $http.get(ip_address+'Building/BuildingParkAll/' + bucid).then(function (response) {
                         $scope.buildingPark = response.data;
                     });
                     $scope.Reservation2 = function () {
@@ -93,7 +93,7 @@
                         $http.get(ip_address+'Building/countAllClassAvailable/' + bucid).then(function (response) {
                             $scope.available = response.data;
                         });
-                        $http.get(ip_address+'Building/BuildingPark/' + bucid).then(function (response) {
+                        $http.get(ip_address+'Building/BuildingParkAll/' + bucid).then(function (response) {
                             $scope.buildingPark = response.data;
                         });
                     }
